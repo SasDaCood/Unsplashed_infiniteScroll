@@ -1,0 +1,51 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: whitesmoke;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.titles {
+    text-align: center;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    letter-spacing: 5px;
+}
+
+#titledesc {
+    margin-bottom: 40px;
+    letter-spacing: 1px;
+}
+
+/* div for loader covering entire viewport */
+.loader {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255, 202, 202, 0.781);
+}
+
+.loader img {
+    position: fixed;
+    width: calc(((100vh + 100vw)/2) * 0.18);
+    opacity: 80%;
+    top: 50vh;
+    left: 50vw;
+    /* push it back to centre */
+    transform: translate(-50%, -50%);
+}
+
+/* Image Container COPIEDDDDDDDD */
+.image-container {
+    margin: 10px 30%;
+  }
+.image-container img {
+    width: 100%;
+    margin-top: 5px;
+  }

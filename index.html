@@ -1,27 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Infite Scroll</title>
-    <link rel="icon" type="image/png" href="favicon.png" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css"
-    />
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <!-- Title -->
-    <h1>Unsplash API - Infinite Scroll</h1>
-    <!-- Loader -->
-    <div class="loader" id="loader">
-      <img src="Blocks-1s-200px.svg" alt="" />
-    </div>
-    <!-- Image Container -->
-    <div class="image-container" id="image-container"></div>
-    <!-- Script -->
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <script src="script.js"></script>
-  </body>
+        <link rel="stylesheet" href="index.css">
+        <link rel="icon" type="images/ico" sizes="16x16" href="favicon.ico">
+        
+        <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css"> -->
+        
+        <title>Infinite Scroller</title>
+    </head>
+    
+    <body>
+        <h1 class="titles" id="toptitle">Infinite Scroller!</h1>
+        <h2 class="titles" id="titledesc">life as we know it will perish before you reach the end</h2>
+        
+        <div class="loader" id="mainloader">
+            <img src="loading.gif" alt="loading gif">
+        </div>
+
+        <div class="image-container" id="image-container"></div>
+        
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="index.js"></script>
+    </body>
 </html>
