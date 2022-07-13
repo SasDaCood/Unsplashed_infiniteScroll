@@ -1,68 +1,53 @@
-// THINGS TO ADD: blurhash, use jquery whenever possible
+const imgContainer = $("#image-container");
+const loader = $("#mainloader");
 
-const imgContainer = document.getElementById("image-container"); //$("#image-container");
-const loader = document.getElementById("mainloader"); // $("#mainloader");
-
-const accessToken = "qc7VUAhvf6sNW26lPOCPA1Ps93j0edCdLRiUK9dBT9A";
-const count = 3;
-const url = `https://api.unsplash.com/photos/random?client_id=${accessToken}&count=${count}`
+const TOKEN = "qc7VUAhvf6sNW26lPOCPA1Ps93j0edCdLRiUK9dBT9A";
+const COUNT = 3;
+const URL = "https://api.unsplash.com/photos/random"
 
 let loadedImgs = 0;
 let currentTotalImgs = 0;
 
 function newImgLoaded() {
     loadedImgs++;
-    console.log(loadedImgs, currentTotalImgs)
-    if (loadedImgs === currentTotalImgs) {
-        loader.hidden = true;
-        console.log("hidden");
-    }
-}
-
-function setAllAttrs(element, attrs) {
-    for (const key in attrs) {
-        element.setAttribute(key, attrs[key]);
-        // change this to jquery!
-    }
+    
+    if (loadedImgs === currentTotalImgs)
+        loader.attr("hidden", true);
 }
 
 async function getPics() {
-    const response = await fetch(url);
-    let picsArr = await response.json();
-    // let picsArr = fetch(url).then(response => response.json());
-    console.log(picsArr);
-    displayPics(picsArr);
+    $.getJSON(URL, {
+        client_id: TOKEN,
+        count: COUNT,
+    }, data => displayPics(data));
 }
 
 function displayPics(picsArr) {
     loadedImgs = 0;
     currentTotalImgs = picsArr.length;
-    picsArr.forEach(element => {
-        const img = document.createElement("img");
-        setAllAttrs(img, {
-            src: element.urls.regular,
-            title: element.alt_description,
-        });
-        img.addEventListener("load", newImgLoaded);
 
-        const link = document.createElement("a");
-        setAllAttrs(link, {
-            href: element.links.html,
+    picsArr.forEach(pic => {
+        const img = $("<img>", {
+            src: pic.urls.regular,
+            title: pic.alt_description,
+        });
+        img.on("load", newImgLoaded);
+
+        const link = $("<a>", {
+            href: pic.links.html,
             target: "_blank",
         });
-        link.appendChild(img);
-        imgContainer.appendChild(link);
+
+        link.append(img);
+        imgContainer.append(link);
     });
 }
 
-window.addEventListener("scroll", () => {
-    // copied this condition coz i aint working out the specifics bruh
-    if ((window.innerHeight + window.scrollY > document.body.offsetHeight - 1000) && loader.hidden) {
-        loader.hidden = false;
+$(window).scroll(() => {
+    if ((window.innerHeight + window.scrollY > document.body.offsetHeight - window.innerHeight * 0.75) && loader.attr("hidden")) {
+        loader.attr("hidden", false);
         getPics();
     }
 });
 
-$(document).ready(() => {
-    getPics();
-})
+$(document).ready(() => getPics());
